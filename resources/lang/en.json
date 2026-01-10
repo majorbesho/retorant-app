@@ -1,0 +1,81 @@
+{
+    "app": {
+        "name": "Restaurant AI Agent",
+        "tagline": "Transform Your Restaurant with AI-Powered Intelligence",
+        "description": "Automate customer service, streamline operations, and boost revenue with our cutting-edge AI agent designed specifically for restaurants."
+    },
+    "nav": {
+        "features": "Features",
+        "pricing": "Pricing",
+        "testimonials": "Testimonials",
+        "login": "Login",
+        "get_started": "Get Started",
+        "language": "العربية"
+    },
+    "hero": {
+        "title": "Your Restaurant's AI-Powered Assistant",
+        "subtitle": "24/7 Customer Service | Smart Order Management | Data-Driven Insights",
+        "description": "Join hundreds of restaurants using AI to deliver exceptional customer experiences, reduce costs, and increase revenue by up to 40%.",
+        "cta_primary": "Start Free Trial",
+        "cta_secondary": "Watch Demo",
+        "trusted_by": "Trusted by 500+ restaurants worldwide"
+    },
+    "features": {
+        "title": "Everything You Need to Succeed",
+        "subtitle": "Powerful features designed for modern restaurants",
+        "items": {
+            "ai_chat": {
+                "title": "AI Customer Support",
+                "description": "Handle unlimited customer inquiries 24/7 with natural language AI that understands context and intent."
+            },
+            "order_management": {
+                "title": "Smart Order Processing",
+                "description": "Automate order taking, modifications, and tracking across all channels - phone, web, and mobile."
+            },
+            "analytics": {
+                "title": "Advanced Analytics",
+                "description": "Real-time insights into customer behavior, popular items, peak hours, and revenue trends."
+            },
+            "multilingual": {
+                "title": "Multilingual Support",
+                "description": "Serve customers in their preferred language with automatic translation and localization."
+            },
+            "integrations": {
+                "title": "Seamless Integrations",
+                "description": "Connect with your existing POS, delivery platforms, and payment systems effortlessly."
+            },
+            "customization": {
+                "title": "Fully Customizable",
+                "description": "Tailor the AI to match your brand voice, menu, and unique business requirements."
+            }
+        }
+    },
+    "cta": {
+        "title": "Ready to Transform Your Restaurant?",
+        "subtitle": "Join hundreds of successful restaurants using AI to grow their business",
+        "button": "Start Your Free 14-Day Trial",
+        "no_credit_card": "No credit card required"
+    },
+    "footer": {
+        "tagline": "Empowering restaurants with AI",
+        "product": "Product",
+        "company": "Company",
+        "support": "Support",
+        "legal": "Legal",
+        "links": {
+            "features": "Features",
+            "pricing": "Pricing",
+            "integrations": "Integrations",
+            "about": "About Us",
+            "careers": "Careers",
+            "blog": "Blog",
+            "help_center": "Help Center",
+            "contact": "Contact Us",
+            "api_docs": "API Documentation",
+            "privacy": "Privacy Policy",
+            "terms": "Terms of Service",
+            "security": "Security"
+        },
+        "copyright": "© 2026 Restaurant AI Agent. All rights reserved."
+    }
+}
