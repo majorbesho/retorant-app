@@ -8,12 +8,14 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\Storage;
 use Laravel\Cashier\Billable;
+use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Support\Str;
+use App\Traits\Auditable;
 
 class User extends Authenticatable
 {
-    use Billable, HasFactory, HasRoles, Notifiable, SoftDeletes;
+    use HasApiTokens, Billable, HasFactory, HasRoles, Notifiable, SoftDeletes, Auditable;
 
     /**
      * The attributes that are mass assignable.

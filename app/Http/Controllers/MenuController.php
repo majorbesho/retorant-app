@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Menu;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class MenuController extends Controller
 {
@@ -12,7 +13,15 @@ class MenuController extends Controller
      */
     public function index()
     {
-        $menus = Menu::all();
+        // Cache Key strategy: menus_page_{page_number}
+        $page = request()->get('page', 1);
+        $cacheKey = 'menus_list_page_' . $page;
+
+        $menus = Cache::remember($cacheKey, 600, function () {
+            // Paginate 15 items per page for speed
+            return Menu::latest()->paginate(15);
+        });
+
         return view('menus.index', compact('menus'));
     }
 
@@ -54,6 +63,9 @@ class MenuController extends Controller
         $menu->is_active = $request->has('is_active');
         $menu->save();
 
+        // Clear Cache
+        Cache::flush(); // Simple invalidation or use tags if supported
+
         return redirect()->route('menus.index')->with('success', 'تم إنشاء المنيو بنجاح');
     }
 
@@ -90,6 +102,9 @@ class MenuController extends Controller
         $menu->is_active = $request->has('is_active');
         $menu->save();
 
+        // Clear Cache
+        Cache::flush();
+
         return redirect()->route('menus.index')->with('success', 'تم تحديث المنيو بنجاح');
     }
 
@@ -99,6 +114,9 @@ class MenuController extends Controller
     public function destroy(Menu $menu)
     {
         $menu->delete();
+        // Clear Cache
+        Cache::flush();
+
         return redirect()->route('menus.index')->with('success', 'تم حذف المنيو بنجاح');
     }
 }

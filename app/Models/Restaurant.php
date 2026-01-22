@@ -6,9 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+use App\Traits\HasTranslations;
+
 class Restaurant extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, HasTranslations, SoftDeletes;
 
     protected $fillable = [
         'uuid',
@@ -93,5 +95,10 @@ class Restaurant extends Model
     public function phones()
     {
         return $this->hasMany(\App\Models\RestaurantPhone::class);
+    }
+
+    public function aiAgents()
+    {
+        return $this->hasMany(AIAgent::class);
     }
 }

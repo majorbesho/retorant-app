@@ -6,9 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+use App\Traits\{HasRestaurant, HasTranslations, Auditable};
+
 class Category extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, HasRestaurant, HasTranslations, SoftDeletes, Auditable;
 
     protected $fillable = [
         'restaurant_id',

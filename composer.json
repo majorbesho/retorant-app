@@ -12,6 +12,7 @@
         "laravel/cashier": "^16.1",
         "laravel/framework": "^12.0",
         "laravel/jetstream": "^5.4",
+        "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.10.1",
         "laravel/ui": "^4.6",
         "spatie/laravel-permission": "^6.24",

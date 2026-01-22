@@ -6,9 +6,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+use App\Traits\HasRestaurant;
+use App\Traits\Auditable;
+
 class Order extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, HasRestaurant, SoftDeletes, Auditable;
 
     protected $fillable = [
         'order_number',

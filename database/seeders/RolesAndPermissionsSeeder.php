@@ -26,24 +26,78 @@ class RolesAndPermissionsSeeder extends Seeder
             Role::firstOrCreate(['name' => $role]);
         }
 
-        // Create Permissions (Example)
+        // Create Permissions
         $permissions = [
-            'manage_restaurants',
-            'manage_users',
-            'manage_orders',
-            'place_orders',
-            'deliver_orders',
+            // System Level
+            'manage-system',
+            'manage-restaurants',
+            'manage-users',
+            'view-admin-dashboard',
+
+            // Restaurant Level
+            'view-restaurant-dashboard',
+            'menu-management',
+            'category-management',
+            'product-management',
+            'addon-management',
+            'variation-management',
+            'order-management',
+            'reservation-management',
+            'staff-management',
+            'restaurant-settings',
+
+            // Customer Level
+            'place-orders',
+            'view-own-orders',
+            'manage-profile',
+
+            // Driver Level
+            'deliver-orders',
+            'update-delivery-status',
         ];
 
         foreach ($permissions as $permission) {
             Permission::firstOrCreate(['name' => $permission]);
         }
 
-        // Assign Permissions to Roles (Basic mapping)
-        Role::findByName('super_admin')->givePermissionTo(Permission::all());
-        Role::findByName('restaurant_owner')->givePermissionTo(['manage_restaurants', 'manage_orders']);
-        Role::findByName('restaurant_staff')->givePermissionTo(['manage_orders']);
-        Role::findByName('customer')->givePermissionTo(['place_orders']);
-        Role::findByName('delivery_driver')->givePermissionTo(['deliver_orders']);
+        // Assign Permissions to Roles
+
+        // Super Admin: Everything
+        Role::findByName('super_admin')->syncPermissions(Permission::all());
+
+        // Restaurant Owner: Everything related to their restaurant
+        Role::findByName('restaurant_owner')->syncPermissions([
+            'view-restaurant-dashboard',
+            'menu-management',
+            'category-management',
+            'product-management',
+            'addon-management',
+            'variation-management',
+            'order-management',
+            'reservation-management',
+            'staff-management',
+            'restaurant-settings',
+        ]);
+
+        // Restaurant Staff: Operations mostly
+        Role::findByName('restaurant_staff')->syncPermissions([
+            'view-restaurant-dashboard',
+            'order-management',
+            'reservation-management',
+            'menu-management',
+        ]);
+
+        // Customer
+        Role::findByName('customer')->syncPermissions([
+            'place-orders',
+            'view-own-orders',
+            'manage-profile',
+        ]);
+
+        // Delivery Driver
+        Role::findByName('delivery_driver')->syncPermissions([
+            'deliver-orders',
+            'update-delivery-status',
+        ]);
     }
 }

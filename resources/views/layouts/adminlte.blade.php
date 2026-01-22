@@ -110,6 +110,13 @@
                             </a>
                         </li>
 
+                        <li class="nav-item">
+                            <a href="{{ route('admin.ai-agents.index') }}" class="nav-link {{ request()->routeIs('admin.ai-agents.*') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-robot"></i>
+                                <p>وكلاء AI</p>
+                            </a>
+                        </li>
+
                         @can('manage-requests')
                         <li class="nav-item">
                             <a href="{{ route('admin.restaurant_requests.index') }}" class="nav-link {{ request()->routeIs('admin.restaurant_requests.*') ? 'active' : '' }}">
@@ -118,6 +125,13 @@
                             </a>
                         </li>
                         @endcan
+
+                        <li class="nav-item">
+                            <a href="{{ route('admin.audit-logs.index') }}" class="nav-link {{ request()->routeIs('admin.audit-logs.*') ? 'active' : '' }}">
+                                <i class="nav-icon fas fa-history"></i>
+                                <p>سجل النشاطات</p>
+                            </a>
+                        </li>
 
                     </ul>
                 </nav>

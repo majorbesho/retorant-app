@@ -6,9 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+use App\Traits\{HasRestaurant, HasTranslations};
+
 class Addon extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, HasRestaurant, HasTranslations, SoftDeletes;
 
     protected $fillable = [
         'addon_group_id',

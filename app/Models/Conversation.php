@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Traits\HasRestaurant;
 
 class Conversation extends Model
 {
-    use HasFactory;
+    use HasFactory, HasRestaurant;
 
     protected $primaryKey = 'id';
     protected $keyType = 'string';
@@ -20,12 +21,18 @@ class Conversation extends Model
         'customer_identifier',
         'customer_name',
         'customer_phone',
+        'customer_phone_number',
         'customer_email',
         'channel',
         'session_id',
         'status',
         'intent',
         'messages',
+        'message_text',
+        'response_text',
+        'message_direction',
+        'sentiment',
+        'escalation_status',
         'context',
         'entities',
         'message_count',

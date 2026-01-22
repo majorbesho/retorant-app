@@ -6,9 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
+use App\Traits\{HasRestaurant, HasTranslations, Auditable};
+
 class Product extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, HasRestaurant, HasTranslations, SoftDeletes, Auditable;
 
     protected $fillable = [
         'restaurant_id',
@@ -96,5 +98,17 @@ class Product extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function variations()
+    {
+        return $this->hasMany(Variation::class);
+    }
+
+    public function addonGroups()
+    {
+        return $this->belongsToMany(AddonGroup::class, 'product_addons')
+            ->withPivot('sort_order')
+            ->withTimestamps();
     }
 }

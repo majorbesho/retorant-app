@@ -71,6 +71,9 @@
                     </tbody>
                 </table>
             </div>
+            <div class="card-footer clearfix">
+                {{ $menus->links() }}
+            </div>
         </div>
     </div>
 </div>

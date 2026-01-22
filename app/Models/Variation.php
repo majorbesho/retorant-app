@@ -5,9 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+use App\Traits\{HasRestaurant, HasTranslations};
+
 class Variation extends Model
 {
-    use HasFactory;
+    use HasFactory, HasRestaurant, HasTranslations;
 
     protected $fillable = [
         'product_id',

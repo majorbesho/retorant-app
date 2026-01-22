@@ -56,6 +56,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('a_i_agents');
+        Schema::dropIfExists('ai_agents');
     }
 };
