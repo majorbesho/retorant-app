@@ -16,8 +16,20 @@ class RestaurantController extends Controller
         $user = auth()->user();
         $restaurant = $user->restaurant;
 
+        // Auto-create restaurant if user doesn't have one (Dev/Fix)
         if (!$restaurant) {
-            abort(404, 'No restaurant found for this user.');
+            $restaurant = \App\Models\Restaurant::create([
+                'name' => $user->name . "'s Restaurant",
+                'slug' => \Illuminate\Support\Str::slug($user->name . '-' . time()),
+                'email' => $user->email,
+                'phone' => $user->phone,
+                'is_active' => true,
+            ]);
+
+            $user->restaurant_id = $restaurant->id;
+            $user->save();
+
+            return redirect()->route('restaurant.settings')->with('success', 'تم إنشاء ملف مطعم جديد لك.');
         }
 
         return view('restaurant.settings', compact('restaurant'));
@@ -86,5 +98,156 @@ class RestaurantController extends Controller
         $restaurant->save();
 
         return back()->with('success', 'تم تحديث البيانات بنجاح.');
+    }
+
+    /**
+     * Show WhatsApp setup page
+     */
+    public function setupWhatsApp()
+    {
+        /** @var \App\Models\User $user */
+        $user = auth()->user();
+        $restaurant = $user->restaurant;
+
+        if (!$restaurant) {
+            // Redirect to settings to create it automatically
+            return redirect()->route('restaurant.settings');
+        }
+
+        return view('restaurant.whatsapp-setup', compact('restaurant'));
+    }
+
+    /**
+     * Create WhatsApp instance
+     */
+    public function createWhatsAppInstance(Request $request)
+    {
+        /** @var \App\Models\User $user */
+        $user = auth()->user();
+        $restaurant = $user->restaurant;
+
+        if (!$restaurant) {
+            return response()->json(['error' => 'Restaurant not found'], 404);
+        }
+
+        // Check if already has an instance
+        if ($restaurant->instance_name && $restaurant->whatsapp_status !== 'failed') {
+            return response()->json([
+                'error' => 'Instance already exists',
+                'instance_name' => $restaurant->instance_name,
+            ], 400);
+        }
+
+        // Set status to pending immediately
+        $restaurant->update([
+            'whatsapp_status' => 'pending',
+        ]);
+
+        // Dispatch job to create instance
+        \App\Jobs\CreateWhatsAppInstanceJob::dispatch($restaurant);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'جاري إنشاء الاتصال...',
+        ]);
+    }
+
+    /**
+     * Get WhatsApp QR code
+     */
+    public function getWhatsAppQRCode(Request $request)
+    {
+        /** @var \App\Models\User $user */
+        $user = auth()->user();
+        $restaurant = $user->restaurant;
+
+        if (!$restaurant || !$restaurant->instance_name) {
+            return response()->json(['error' => 'No instance found'], 404);
+        }
+
+        // Return cached QR code if available
+        if ($restaurant->whatsapp_qr_code) {
+            return response()->json([
+                'success' => true,
+                'qrcode' => $restaurant->whatsapp_qr_code,
+                'status' => $restaurant->whatsapp_status,
+            ]);
+        }
+
+        // Fetch fresh QR code
+        $evolutionService = app(\App\Services\WhatsAppEvolutionService::class);
+        $qrData = $evolutionService->getInstanceQRCode($restaurant->instance_name);
+
+        if ($qrData && isset($qrData['qrcode'])) {
+            $restaurant->update([
+                'whatsapp_qr_code' => $qrData['qrcode'],
+            ]);
+
+            return response()->json([
+                'success' => true,
+                'qrcode' => $qrData['qrcode'],
+                'status' => $restaurant->whatsapp_status,
+            ]);
+        }
+
+        return response()->json([
+            'success' => false,
+            'message' => 'QR code not available yet',
+            'status' => $restaurant->whatsapp_status,
+        ]);
+    }
+
+    /**
+     * Check WhatsApp connection status
+     */
+    public function checkWhatsAppStatus(Request $request)
+    {
+        /** @var \App\Models\User $user */
+        $user = auth()->user();
+        $restaurant = $user->restaurant;
+
+        if (!$restaurant || !$restaurant->instance_name) {
+            return response()->json(['error' => 'No instance found'], 404);
+        }
+
+        // Optimization: Read directly from DB instead of calling API
+        // Webhooks will update the status automatically
+
+        return response()->json([
+            'success' => true,
+            'status' => $restaurant->whatsapp_status,
+            'connected' => $restaurant->hasWhatsAppConnected(),
+            'whatsapp_number' => $restaurant->whatsapp_number,
+            'connected_at' => $restaurant->whatsapp_connected_at?->diffForHumans(),
+        ]);
+    }
+
+    /**
+     * Disconnect WhatsApp
+     */
+    public function disconnectWhatsApp(Request $request)
+    {
+        /** @var \App\Models\User $user */
+        $user = auth()->user();
+        $restaurant = $user->restaurant;
+
+        if (!$restaurant || !$restaurant->instance_name) {
+            return back()->with('error', 'لا يوجد اتصال WhatsApp');
+        }
+
+        // Logout from Evolution
+        $evolutionService = app(\App\Services\WhatsAppEvolutionService::class);
+        $success = $evolutionService->logoutInstance($restaurant->instance_name);
+
+        if ($success) {
+            $restaurant->update([
+                'whatsapp_status' => 'disconnected',
+                'whatsapp_qr_code' => null,
+            ]);
+
+            return back()->with('success', 'تم قطع الاتصال بنجاح');
+        }
+
+        return back()->with('error', 'فشل قطع الاتصال');
     }
 }

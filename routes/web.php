@@ -15,6 +15,7 @@ Route::get('/', function () {
 });
 
 Route::post('/join-us', [PublicRestaurantController::class, 'store'])->name('restaurant.join');
+// Route::get('/restaurant/{slug}', [PublicRestaurantController::class, 'show'])->name('restaurant.show'); // Moved to bottom
 
 // Language Switcher
 Route::get('/locale/{locale}', [App\Http\Controllers\LocaleController::class, 'switch'])->name('locale.switch');
@@ -43,8 +44,17 @@ Route::middleware(['auth'])->group(function () {
     Route::post('products/{product}/delete-image', [ProductController::class, 'deleteImage'])->name('products.delete_image');
 
     // Restaurant Settings
-    Route::get('restaurant/settings', [App\Http\Controllers\RestaurantController::class, 'settings'])->name('restaurant.settings')->middleware('permission:restaurant-settings');
-    Route::put('restaurant/settings', [App\Http\Controllers\RestaurantController::class, 'updateSettings'])->name('restaurant.settings.update')->middleware('permission:restaurant-settings');
+    Route::get('restaurant/settings', [App\Http\Controllers\RestaurantController::class, 'settings'])->name('restaurant.settings');
+    Route::put('restaurant/settings', [App\Http\Controllers\RestaurantController::class, 'updateSettings'])->name('restaurant.settings.update');
+
+    // WhatsApp Setup Routes
+    Route::prefix('restaurant/whatsapp')->name('restaurant.whatsapp.')->group(function () {
+        Route::get('/setup', [App\Http\Controllers\RestaurantController::class, 'setupWhatsApp'])->name('setup');
+        Route::post('/create-instance', [App\Http\Controllers\RestaurantController::class, 'createWhatsAppInstance'])->name('create');
+        Route::get('/qr-code', [App\Http\Controllers\RestaurantController::class, 'getWhatsAppQRCode'])->name('qr');
+        Route::get('/status', [App\Http\Controllers\RestaurantController::class, 'checkWhatsAppStatus'])->name('status');
+        Route::post('/disconnect', [App\Http\Controllers\RestaurantController::class, 'disconnectWhatsApp'])->name('disconnect');
+    });
 
     // Admin Routes
     Route::middleware(['role:super_admin|restaurant_owner'])->prefix('admin')->name('admin.')->group(function () {
@@ -61,3 +71,6 @@ Route::middleware(['auth'])->group(function () {
 
 
 Route::post('/whatsapp/webhook', [WhatsAppController::class, 'handleIncoming']);
+
+// Public Restaurant Route - Defines at the end to avoid conflicts with specific routes like /settings
+Route::get('/restaurant/{slug}', [PublicRestaurantController::class, 'show'])->name('restaurant.show');

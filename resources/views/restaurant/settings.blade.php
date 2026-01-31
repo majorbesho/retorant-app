@@ -242,6 +242,88 @@
                                     <input type="text" name="whatsapp_number" class="custom-input" value="{{ old('whatsapp_number', $restaurant->whatsapp_number) }}" placeholder="966XXXXXXXXX">
                                     <small class="text-muted d-block mt-1 text-end">تأكد من كتابة الرقم مع مفتاح الدولة وبدون أصفار إضافية</small>
                                 </div>
+
+                                <!-- WhatsApp Connection Status -->
+                                <div class="col-md-12 mt-4">
+                                    <h3 class="section-title">حالة اتصال WhatsApp</h3>
+                                    
+                                    <div class="ai-switch-card" style="background: {{ $restaurant->hasWhatsAppConnected() ? '#d1fae5' : '#fff7ed' }}; border-color: {{ $restaurant->hasWhatsAppConnected() ? '#10b981' : '#f59e0b' }};">
+                                        <div class="text-right">
+                                            @if($restaurant->hasWhatsAppConnected())
+                                                <div class="d-flex align-items-center justify-content-end">
+                                                    <div class="mr-3">
+                                                        <span class="badge badge-success badge-lg">
+                                                            <i class="fas fa-check-circle"></i>
+                                                            متصل
+                                                        </span>
+                                                    </div>
+                                                    <div>
+                                                        <span class="d-block font-weight-bold text-success">
+                                                            <i class="fab fa-whatsapp"></i>
+                                                            WhatsApp متصل ويعمل
+                                                        </span>
+                                                        @if($restaurant->whatsapp_number)
+                                                            <small class="text-muted d-block">الرقم: {{ $restaurant->whatsapp_number }}</small>
+                                                        @endif
+                                                        @if($restaurant->whatsapp_connected_at)
+                                                            <small class="text-muted d-block">منذ: {{ $restaurant->whatsapp_connected_at->diffForHumans() }}</small>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            @elseif($restaurant->whatsapp_status === 'pending')
+                                                <div class="d-flex align-items-center justify-content-end">
+                                                    <div class="mr-3">
+                                                        <span class="badge badge-warning badge-lg">
+                                                            <i class="fas fa-clock"></i>
+                                                            في الانتظار
+                                                        </span>
+                                                    </div>
+                                                    <div>
+                                                        <span class="d-block font-weight-bold text-warning">
+                                                            <i class="fab fa-whatsapp"></i>
+                                                            في انتظار مسح QR Code
+                                                        </span>
+                                                        <small class="text-muted d-block">قم بإكمال عملية الربط</small>
+                                                    </div>
+                                                </div>
+                                            @else
+                                                <div class="d-flex align-items-center justify-content-end">
+                                                    <div class="mr-3">
+                                                        <span class="badge badge-secondary badge-lg">
+                                                            <i class="fas fa-times-circle"></i>
+                                                            غير متصل
+                                                        </span>
+                                                    </div>
+                                                    <div>
+                                                        <span class="d-block font-weight-bold text-muted">
+                                                            <i class="fab fa-whatsapp"></i>
+                                                            WhatsApp غير مفعّل
+                                                        </span>
+                                                        <small class="text-muted d-block">قم بربط حساب WhatsApp لاستقبال الطلبات</small>
+                                                    </div>
+                                                </div>
+                                            @endif
+                                        </div>
+                                        <div>
+                                            <a href="{{ route('restaurant.whatsapp.setup') }}" class="btn btn-{{ $restaurant->hasWhatsAppConnected() ? 'info' : 'success' }} btn-sm rounded-pill px-4">
+                                                <i class="fab fa-whatsapp"></i>
+                                                {{ $restaurant->hasWhatsAppConnected() ? 'إدارة الاتصال' : 'ربط WhatsApp' }}
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    @if(!$restaurant->hasWhatsAppConnected())
+                                        <div class="alert alert-info mt-3" style="border-radius: 10px;">
+                                            <h5><i class="icon fas fa-info-circle"></i> لماذا ربط WhatsApp؟</h5>
+                                            <ul class="mb-0 text-right pr-4">
+                                                <li>استقبال الطلبات تلقائياً عبر WhatsApp</li>
+                                                <li>الرد الآلي على استفسارات العملاء</li>
+                                                <li>إرسال تأكيدات الطلبات والإشعارات</li>
+                                                <li>تحسين تجربة العملاء وزيادة المبيعات</li>
+                                            </ul>
+                                        </div>
+                                    @endif
+                                </div>
                             </div>
                         </div>
 

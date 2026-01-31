@@ -12,6 +12,8 @@ class Menu extends Model
 {
     use HasFactory, HasRestaurant, HasTranslations, SoftDeletes;
 
+    protected $touches = ['restaurant'];
+
     protected $fillable = [
         'restaurant_id',
         'name',
@@ -42,5 +44,10 @@ class Menu extends Model
     public function categories()
     {
         return $this->hasMany(Category::class);
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', true);
     }
 }

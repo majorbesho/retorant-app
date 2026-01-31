@@ -13,38 +13,21 @@ return new class extends Migration
     {
         Schema::create('subscriptions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('restaurant_id')->constrained()->cascadeOnDelete();
-            $table->string('plan_id'); // basic, pro, enterprise
-            $table->string('plan_name');
-            $table->json('plan_features');
-
-            // الفترة
-            $table->enum('billing_cycle', ['monthly', 'quarterly', 'yearly']);
-            $table->timestamp('starts_at');
-            $table->timestamp('ends_at')->nullable();
+            $table->foreignId('user_id'); // Cashier standard
+            $table->string('name');       // Cashier standard (e.g. 'default')
+            $table->string('stripe_id')->unique();
+            $table->string('stripe_status');
+            $table->string('stripe_price')->nullable();
+            $table->integer('quantity')->nullable();
             $table->timestamp('trial_ends_at')->nullable();
-            $table->timestamp('cancelled_at')->nullable();
+            $table->timestamp('ends_at')->nullable();
 
-            // الدفع
-            $table->decimal('amount', 10, 2);
-            $table->string('currency')->default('AED');
-            $table->enum('status', ['active', 'canceled', 'expired', 'past_due', 'pending'])->default('pending');
-            $table->string('stripe_subscription_id')->nullable();
-            $table->string('stripe_customer_id')->nullable();
-
-            // الاستخدام
-            $table->json('usage_limits')->nullable(); // {ai_calls: 1000, users: 5}
-            $table->json('current_usage')->nullable();
-
-            // التحديثات
-            $table->boolean('auto_renew')->default(true);
-            $table->json('upcoming_changes')->nullable(); // التغييرات المقررة
+            // Custom fields for our SaaS logic
+            $table->foreignId('restaurant_id')->nullable()->constrained()->onDelete('set null'); // Optional link
 
             $table->timestamps();
-            $table->softDeletes();
 
-            $table->index(['restaurant_id', 'status', 'ends_at']);
-            $table->index('stripe_subscription_id');
+            $table->index(['user_id', 'stripe_status']);
         });
     }
 

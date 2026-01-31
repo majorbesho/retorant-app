@@ -15,12 +15,31 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        echo "\n🚀 بدء إنشاء البيانات التجريبية...\n";
+        echo "========================================\n\n";
+
+        // 0. إنشاء خطط الاشتراك أولاً
+        echo "📋 إنشاء خطط الاشتراك...\n";
+        $this->call(SubscriptionPlanSeeder::class);
+
+        // 0.1 إنشاء طرق الدفع
+        echo "\n💳 إنشاء طرق الدفع...\n";
+        $this->call(PaymentMethodSeeder::class);
+
+        // 0.2 إنشاء اشتراكات المستخدمين
+        echo "\n👤 إنشاء اشتراكات المستخدمين...\n";
+        $this->call(UserSubscriptionSeeder::class);
+
         // 1. Create Users
         $users = User::factory()->count(20)->create();
 
         // 20+ Users
         // Also call RolesAndPermissionsSeeder if needed once
         $this->call(RolesAndPermissionsSeeder::class);
+
+        // 0.3 إنشاء الموظفين
+        echo "\n👥 إنشاء الموظفين...\n";
+        $this->call(StaffMemberSeeder::class);
 
         // 2. Create Restaurants
         $restaurants = \App\Models\Restaurant::factory()
@@ -89,11 +108,7 @@ class DatabaseSeeder extends Seeder
                                 'product_id' => $product->id,
                                 'product_name' => $product->name, // Ensure consistency
                                 'unit_price' => $product->price,
-                                'total_price' => $product->price, // * quantity handled by factory? No factory has fixed quantity logic usually.
-                                // We'll let factory generated quantity stand, but updating price might be good.
-                                // But factory definition uses random price. 
-                                // Let's just set product_id and let factory randoms be random for now, 
-                                // or better: sync price with product.
+                                'total_price' => $product->price,
                             ];
                         })
                         ->create();
@@ -119,5 +134,18 @@ class DatabaseSeeder extends Seeder
                 ->for($restaurant)
                 ->create();
         }
+
+        echo "\n========================================\n";
+        echo "✅ تم إنشاء جميع البيانات التجريبية بنجاح!\n\n";
+
+        echo "📊 ملخص البيانات المُنشأة:\n";
+        echo "   - خطط اشتراك: " . \App\Models\SubscriptionPlan::count() . "\n";
+        echo "   - طرق دفع: " . \App\Models\PaymentMethod::count() . "\n";
+        echo "   - اشتراكات: " . \App\Models\UserSubscription::count() . "\n";
+        echo "   - موظفين: " . \App\Models\StaffMember::count() . "\n";
+        echo "   - مستخدمين: " . \App\Models\User::count() . "\n";
+        echo "   - مطاعم: " . \App\Models\Restaurant::count() . "\n";
+        echo "   - طلبات: " . \App\Models\Order::count() . "\n";
+        echo "\n";
     }
 }

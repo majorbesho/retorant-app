@@ -12,6 +12,8 @@ class Product extends Model
 {
     use HasFactory, HasRestaurant, HasTranslations, SoftDeletes, Auditable;
 
+    protected $touches = ['category'];
+
     protected $fillable = [
         'restaurant_id',
         'category_id',
@@ -110,5 +112,10 @@ class Product extends Model
         return $this->belongsToMany(AddonGroup::class, 'product_addons')
             ->withPivot('sort_order')
             ->withTimestamps();
+    }
+
+    public function scopeActive($query)
+    {
+        return $query->where('is_active', true);
     }
 }

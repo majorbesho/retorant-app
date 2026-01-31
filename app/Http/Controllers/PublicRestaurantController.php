@@ -11,6 +11,16 @@ use Illuminate\Support\Str;
 
 class PublicRestaurantController extends Controller
 {
+    public function show($slug)
+    {
+        $restaurant = Restaurant::where('slug', $slug)->active()->firstOrFail();
+
+        // Load menu or other public data if needed
+        $restaurant->load(['menus.categories.products']);
+
+        return view('public.restaurant.show', compact('restaurant'));
+    }
+
     public function store(Request $request)
     {
         $validated = $request->validate([
