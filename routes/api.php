@@ -23,8 +23,9 @@ Route::get('/user', function (Request $request) {
 // ========================================
 // WhatsApp Evolution Webhook
 // ========================================
-Route::post('/whatsapp/webhook', [App\Http\Controllers\Api\WhatsAppWebhookController::class, 'handle'])
-    ->name('whatsapp.webhook');
+use App\Http\Controllers\Webhook\WhatsAppWebhookController;
+
+Route::post('/whatsapp/webhook', [WhatsAppWebhookController::class, 'handle']);
 
 // ========================================
 // Subscription Plans Routes
