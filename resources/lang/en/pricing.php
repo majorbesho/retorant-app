@@ -1,58 +1,50 @@
 <?php
 
 return [
-    "title" => "Simple, Transparent Pricing",
-    "subtitle" => "Choose the plan that fits your restaurant",
+    "title" => "Flexible Plans for Every Size",
+    "description" => "Start for free, pay only as you grow",
     "monthly" => "Monthly",
-    "annually" => "Annually",
-    "save" => "Save 20%",
+    "yearly" => "Yearly",
+    "save_badge" => "Save 20%",
+    "currency" => "AED",
+    "per_month" => "/mo",
     "plans" => [
         "starter" => [
-            "name" => "Starter",
-            "price" => "$99",
-            "period" => "/month",
-            "description" => "Perfect for small restaurants",
+            "name" => "Basic Plan",
+            "subtitle" => "For Small Restaurants",
+            "cta" => "Start Free",
             "features" => [
-                "Up to 1,000 conversations/month",
-                "Basic AI chatbot",
-                "Email support",
-                "2 integrations",
-                "Basic analytics"
-            ],
-            "cta" => "Start Free Trial"
+                "100 AI Conversations/mo",
+                "One Channel (WhatsApp)",
+                "Basic Analytics",
+                "Email Support"
+            ]
         ],
         "professional" => [
-            "name" => "Professional",
-            "price" => "$299",
-            "period" => "/month",
-            "description" => "For growing restaurant chains",
+            "badge" => "Most Popular",
+            "name" => "Professional Plan",
+            "subtitle" => "For Growing Restaurants",
+            "cta" => "Choose Plan",
             "features" => [
-                "Up to 10,000 conversations/month",
-                "Advanced AI with learning",
-                "Priority support",
-                "Unlimited integrations",
-                "Advanced analytics & reports",
-                "Custom branding",
-                "Multi-location support"
-            ],
-            "cta" => "Get Started",
-            "popular" => true
+                "1000 AI Conversations/mo",
+                "Multiple Channels",
+                "Advanced Analytics",
+                "Priority Support",
+                "POS Integration"
+            ]
         ],
         "enterprise" => [
-            "name" => "Enterprise",
-            "price" => "Custom",
-            "period" => "",
-            "description" => "For large restaurant groups",
+            "name" => "Enterprise Plan",
+            "subtitle" => "For Large Chains",
+            "custom_price" => "Custom",
+            "cta" => "Contact Us",
             "features" => [
-                "Unlimited conversations",
-                "Dedicated AI training",
-                "24/7 phone support",
-                "Custom integrations",
-                "White-label solution",
-                "Dedicated account manager",
-                "SLA guarantee"
-            ],
-            "cta" => "Contact Sales"
+                "Unlimited Conversations",
+                "All Features",
+                "Custom Agents",
+                "24/7 Support",
+                "SLA Guaranteed"
+            ]
         ]
     ]
 ];

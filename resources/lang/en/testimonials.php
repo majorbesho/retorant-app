@@ -1,29 +1,23 @@
 <?php
 
 return [
-    "title" => "Loved by Restaurant Owners",
-    "subtitle" => "See what our customers have to say",
+    "title" => "Our Success Stories",
+    "description" => "Real restaurants achieving exceptional results",
     "items" => [
         [
-            "name" => "Sarah Johnson",
-            "role" => "Owner, Bella Italia",
-            "location" => "New York, USA",
-            "rating" => 5,
-            "text" => "This AI agent has transformed our customer service. We're handling 3x more orders with the same staff, and customer satisfaction is at an all-time high!"
+            "quote" => "Our orders increased by 40% after activating Retorant AI. The agent works even after we close!",
+            "name" => "Ahmed Alshami",
+            "position" => "Owner, Atayeb Al Sham"
         ],
         [
-            "name" => "Ahmed Al-Rashid",
-            "role" => "Manager, Spice Garden",
-            "location" => "Dubai, UAE",
-            "rating" => 5,
-            "text" => "The multilingual support is incredible. Our customers can order in Arabic, English, or Hindi, and the AI handles it perfectly every time."
+            "quote" => "We saved 15,000 SAR monthly in staff costs. The best investment for our restaurant!",
+            "name" => "Fatima Zahra",
+            "position" => "Manager, Coffee Corner"
         ],
         [
-            "name" => "Maria Rodriguez",
-            "role" => "CEO, TacoChain",
-            "location" => "Mexico City, Mexico",
-            "rating" => 5,
-            "text" => "We've seen a 40% increase in revenue since implementing this AI solution. The analytics alone are worth the investment!"
+            "quote" => "Analytics helped us understand our customers better. We now know the most popular dishes and peak times.",
+            "name" => "Mohammed Abdullah",
+            "position" => "Manager, Golden Star Chain"
         ]
     ]
 ];

@@ -8,10 +8,11 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 use Cviebrock\EloquentSluggable\Sluggable;
 use App\Traits\HasTranslations;
+use App\Traits\HasUuid;
 
 class Restaurant extends Model
 {
-    use HasFactory, HasTranslations, SoftDeletes, Sluggable;
+    use HasFactory, HasTranslations, SoftDeletes, Sluggable, HasUuid;
 
     /**
      * Return the sluggable configuration array for this model.

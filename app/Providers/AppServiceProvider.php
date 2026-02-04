@@ -25,6 +25,13 @@ class AppServiceProvider extends ServiceProvider
     {
         Paginator::useBootstrap();
 
+        // Super Admin Bypass: Grant all permissions to super admins
+        Gate::before(function (User $user, $ability) {
+            if ($user->is_super_admin) {
+                return true;
+            }
+        });
+
         Gate::define('manage-system', function (User $user) {
             return $user->is_super_admin || $user->hasRole('super_admin');
         });

@@ -57,7 +57,7 @@ Route::middleware(['auth'])->group(function () {
     });
 
     // Admin Routes
-    Route::middleware(['role:super_admin|restaurant_owner'])->prefix('admin')->name('admin.')->group(function () {
+    Route::middleware(['admin_access'])->prefix('admin')->name('admin.')->group(function () {
         Route::get('restaurant-requests', [App\Http\Controllers\Admin\RestaurantRequestController::class, 'index'])->name('restaurant_requests.index');
         Route::get('restaurant-requests/{restaurantRequest}', [App\Http\Controllers\Admin\RestaurantRequestController::class, 'show'])->name('restaurant_requests.show');
         Route::post('restaurant-requests/{restaurantRequest}/approve', [App\Http\Controllers\Admin\RestaurantRequestController::class, 'approve'])->name('restaurant_requests.approve');

@@ -18,11 +18,29 @@ class RestaurantController extends Controller
 
         // Auto-create restaurant if user doesn't have one (Dev/Fix)
         if (!$restaurant) {
+            $restaurantName = $user->name . "'s Restaurant";
             $restaurant = \App\Models\Restaurant::create([
-                'name' => $user->name . "'s Restaurant",
+                'name' => $restaurantName,
+                'name_translations' => [
+                    'ar' => $restaurantName,
+                    'en' => $restaurantName,
+                ],
+                'description_translations' => [
+                    'ar' => 'مطعم جديد',
+                    'en' => 'New Restaurant',
+                ],
+                'address_translations' => [
+                    'ar' => '',
+                    'en' => '',
+                ],
                 'slug' => \Illuminate\Support\Str::slug($user->name . '-' . time()),
                 'email' => $user->email,
                 'phone' => $user->phone,
+                'type' => 'restaurant',
+                'cuisine_type' => 'International',
+                'cuisine_tags' => [],
+                'city' => 'Dubai',
+                'area' => 'Not Set',
                 'is_active' => true,
             ]);
 

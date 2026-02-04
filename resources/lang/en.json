@@ -1,81 +1,268 @@
 {
     "app": {
-        "name": "Restaurant AI Agent",
-        "tagline": "Transform Your Restaurant with AI-Powered Intelligence",
-        "description": "Automate customer service, streamline operations, and boost revenue with our cutting-edge AI agent designed specifically for restaurants."
+        "name": "Retorant AI",
+        "tagline": "AI Agent for Your Restaurant",
+        "meta_description": "Transform your restaurant customer service with a smart AI agent working 24/7 on WhatsApp and digital channels."
     },
     "nav": {
         "features": "Features",
-        "pricing": "Pricing",
+        "how_it_works": "How it Works",
         "testimonials": "Testimonials",
+        "pricing": "Pricing",
         "login": "Login",
-        "get_started": "Get Started",
-        "language": "العربية"
+        "get_started": "Get Started"
     },
     "hero": {
-        "title": "Your Restaurant's AI-Powered Assistant",
-        "subtitle": "24/7 Customer Service | Smart Order Management | Data-Driven Insights",
-        "description": "Join hundreds of restaurants using AI to deliver exceptional customer experiences, reduce costs, and increase revenue by up to 40%.",
+        "badge": "🚀 New Generation of Customer Service",
+        "headline_start": "Smart AI Agent",
+        "headline_end": "Works 24/7 for Your Restaurant",
+        "subheadline": "Automate conversations, orders, and reservations via WhatsApp and digital channels. Save 70% on customer service costs.",
         "cta_primary": "Start Free Trial",
         "cta_secondary": "Watch Demo",
-        "trusted_by": "Trusted by 500+ restaurants worldwide"
+        "stat_conversations": "Conversations/Mo",
+        "stat_satisfaction": "Customer Satisfaction",
+        "stat_availability": "Always Available",
+        "scroll_more": "Discover More"
     },
-    "features": {
-        "title": "Everything You Need to Succeed",
-        "subtitle": "Powerful features designed for modern restaurants",
+    "problems": {
+        "title": "Challenges We Solve",
+        "description": "Turning customer service problems into growth opportunities",
+        "card_title": "Current Challenges",
         "items": {
-            "ai_chat": {
-                "title": "AI Customer Support",
-                "description": "Handle unlimited customer inquiries 24/7 with natural language AI that understands context and intent."
+            "cost": {
+                "title": "High Operating Costs",
+                "desc": "Staff salaries and continuous training costs"
             },
-            "order_management": {
-                "title": "Smart Order Processing",
-                "description": "Automate order taking, modifications, and tracking across all channels - phone, web, and mobile."
+            "hours": {
+                "title": "Limited Hours",
+                "desc": "Missed orders outside working hours"
             },
-            "analytics": {
-                "title": "Advanced Analytics",
-                "description": "Real-time insights into customer behavior, popular items, peak hours, and revenue trends."
+            "errors": {
+                "title": "Human Errors",
+                "desc": "Order mistakes leading to customer dissatisfaction"
             },
-            "multilingual": {
-                "title": "Multilingual Support",
-                "description": "Serve customers in their preferred language with automatic translation and localization."
-            },
-            "integrations": {
-                "title": "Seamless Integrations",
-                "description": "Connect with your existing POS, delivery platforms, and payment systems effortlessly."
-            },
-            "customization": {
-                "title": "Fully Customizable",
-                "description": "Tailor the AI to match your brand voice, menu, and unique business requirements."
+            "channels": {
+                "title": "Complex Channels",
+                "desc": "Difficulty managing WhatsApp, Phone, and Website"
             }
         }
     },
-    "cta": {
-        "title": "Ready to Transform Your Restaurant?",
-        "subtitle": "Join hundreds of successful restaurants using AI to grow their business",
-        "button": "Start Your Free 14-Day Trial",
-        "no_credit_card": "No credit card required"
+    "solutions": {
+        "card_title": "The Smart Solution",
+        "items": {
+            "automation": {
+                "title": "Full Automation",
+                "desc": "AI agent works non-stop at a fixed cost"
+            },
+            "availability": {
+                "title": "24/7 Service",
+                "desc": "Receive orders and inquiries anytime"
+            },
+            "accuracy": {
+                "title": "99% Accuracy",
+                "desc": "Precise order processing without errors"
+            },
+            "integration": {
+                "title": "Unified Integration",
+                "desc": "Manage all channels from one dashboard"
+            }
+        }
+    },
+    "features": {
+        "title": "Powerful Features for Success",
+        "description": "Everything you need to transform customer service into an exceptional experience",
+        "items": {
+            "chat": {
+                "title": "Smart Conversations",
+                "desc": "Natural understanding of Arabic and English with accurate context-aware responses",
+                "points": [
+                    "Natural Language Processing",
+                    "Conversation Memory",
+                    "Sentiment Analysis"
+                ]
+            },
+            "orders": {
+                "title": "Order Management",
+                "desc": "Automatically receive and process orders with instant confirmation",
+                "points": [
+                    "Dynamic Menu",
+                    "Automated Cost Calculation",
+                    "Order Tracking"
+                ]
+            },
+            "analytics": {
+                "title": "Advanced Analytics",
+                "desc": "Deep insights into customer behavior and restaurant performance",
+                "points": [
+                    "Comprehensive Dashboard",
+                    "Detailed Reports",
+                    "Smart Predictions"
+                ]
+            },
+            "integrations": {
+                "title": "Seamless Integration",
+                "desc": "Direct connection with WhatsApp, POS systems, and delivery tools",
+                "points": [
+                    "WhatsApp Business API",
+                    "POS Integration",
+                    "Delivery Platforms"
+                ]
+            },
+            "customization": {
+                "title": "Full Customization",
+                "desc": "Agent persona, tone of voice, and scenarios tailored to your brand",
+                "points": [
+                    "Customizable Persona",
+                    "Custom Scenarios",
+                    "Consistent Branding"
+                ]
+            },
+            "security": {
+                "title": "Security & Privacy",
+                "desc": "Customer data protection with full compliance to security standards",
+                "points": [
+                    "End-to-End Encryption",
+                    "GDPR Compliant",
+                    "Secure Backup"
+                ]
+            }
+        }
+    },
+    "how_it_works": {
+        "title": "Start in 3 Simple Steps",
+        "description": "From registration to launch in under 10 minutes",
+        "steps": {
+            "1": {
+                "title": "Register & Add Restaurant",
+                "desc": "Create your account, enter restaurant info, and upload the menu"
+            },
+            "2": {
+                "title": "Customize Your AI Agent",
+                "desc": "Choose the persona, tone, and language that fits your brand"
+            },
+            "3": {
+                "title": "Launch & Receive Customers",
+                "desc": "Connect WhatsApp and start receiving orders and chats immediately"
+            }
+        },
+        "cta": "Start Now for Free"
+    },
+    "testimonials": {
+        "title": "Our Success Stories",
+        "description": "Real restaurants achieving exceptional results",
+        "items": [
+            {
+                "quote": "Our orders increased by 40% after activating Retorant AI. The agent works even after we close!",
+                "name": "Ahmed Alshami",
+                "position": "Owner, Atayeb Al Sham"
+            },
+            {
+                "quote": "We saved 15,000 SAR monthly in staff costs. The best investment for our restaurant!",
+                "name": "Fatima Zahra",
+                "position": "Manager, Coffee Corner"
+            },
+            {
+                "quote": "Analytics helped us understand our customers better. We now know the most popular dishes and peak times.",
+                "name": "Mohammed Abdullah",
+                "position": "Manager, Golden Star Chain"
+            }
+        ]
+    },
+    "pricing": {
+        "title": "Flexible Plans for Every Size",
+        "description": "Start for free, pay only as you grow",
+        "monthly": "Monthly",
+        "yearly": "Yearly",
+        "save_badge": "Save 20%",
+        "currency": "AED",
+        "per_month": "/mo",
+        "plans": {
+            "starter": {
+                "name": "Basic Plan",
+                "subtitle": "For Small Restaurants",
+                "cta": "Start Free",
+                "features": [
+                    "100 AI Conversations/mo",
+                    "One Channel (WhatsApp)",
+                    "Basic Analytics",
+                    "Email Support"
+                ]
+            },
+            "professional": {
+                "badge": "Most Popular",
+                "name": "Professional Plan",
+                "subtitle": "For Growing Restaurants",
+                "cta": "Choose Plan",
+                "features": [
+                    "1000 AI Conversations/mo",
+                    "Multiple Channels",
+                    "Advanced Analytics",
+                    "Priority Support",
+                    "POS Integration"
+                ]
+            },
+            "enterprise": {
+                "name": "Enterprise Plan",
+                "subtitle": "For Large Chains",
+                "custom_price": "Custom",
+                "cta": "Contact Us",
+                "features": [
+                    "Unlimited Conversations",
+                    "All Features",
+                    "Custom Agents",
+                    "24/7 Support",
+                    "SLA Guaranteed"
+                ]
+            }
+        }
+    },
+    "faq": {
+        "title": "Frequently Asked Questions",
+        "description": "Quick answers to common questions",
+        "items": [
+            {
+                "q": "How does the AI agent work with WhatsApp?",
+                "a": "We use the official WhatsApp Business API for direct integration. The agent receives messages, understands them, and responds automatically based on your menu and settings."
+            },
+            {
+                "q": "Does it fully support Arabic?",
+                "a": "Yes, the agent is trained in Modern Standard Arabic and Gulf dialects, with full English support as well."
+            },
+            {
+                "q": "What happens with complex inquiries?",
+                "a": "The agent automatically transfers the conversation to a human staff member when distinct complex or emotional inquiries are detected, providing a full conversation summary."
+            },
+            {
+                "q": "Can I try the service before subscribing?",
+                "a": "Absolutely! We offer a 14-day free trial with no credit card required."
+            }
+        ]
+    },
+    "cta_section": {
+        "title": "Ready to Transform Your Customer Service?",
+        "subtitle": "Join hundreds of restaurants using Retorant AI",
+        "button": "Start Your Free Trial Now",
+        "note": "✓ No credit card required ✓ Cancel anytime"
     },
     "footer": {
-        "tagline": "Empowering restaurants with AI",
+        "about": "Leading AI platform for restaurant customer service automation in the Gulf region",
         "product": "Product",
         "company": "Company",
         "support": "Support",
-        "legal": "Legal",
         "links": {
             "features": "Features",
             "pricing": "Pricing",
-            "integrations": "Integrations",
+            "how_it_works": "How it Works",
+            "faq": "FAQ",
             "about": "About Us",
-            "careers": "Careers",
             "blog": "Blog",
-            "help_center": "Help Center",
+            "careers": "Careers",
             "contact": "Contact Us",
-            "api_docs": "API Documentation",
+            "help": "Help Center",
+            "docs": "Documentation",
             "privacy": "Privacy Policy",
-            "terms": "Terms of Service",
-            "security": "Security"
+            "terms": "Terms & Conditions"
         },
-        "copyright": "© 2026 Restaurant AI Agent. All rights reserved."
+        "copyright": "© 2026 Retorant AI. All rights reserved."
     }
 }
