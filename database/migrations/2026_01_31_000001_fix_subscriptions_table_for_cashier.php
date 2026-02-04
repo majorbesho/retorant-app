@@ -13,23 +13,23 @@ return new class extends Migration
     {
         // Drop foreign key from restaurants table first
         if (Schema::hasColumn('restaurants', 'subscription_id')) {
-            Schema::table('restaurants', function (Blueprint $table) {
-                // We attempt to drop the foreign key. 
-                // The name is usually 'restaurants_subscription_id_foreign' for constrained('user_subscriptions')
-                // If the constraint name is different, this might fail, but this is the standard naming.
-                try {
+            try {
+                Schema::table('restaurants', function (Blueprint $table) {
                     $table->dropForeign(['subscription_id']);
-                } catch (\Exception $e) {
-                    // Ignore if FK doesn't exist
-                }
+                });
+            } catch (\Exception $e) {
+                // Ignore if FK doesn't exist
+            }
 
-                // Drop index if exists (specifically for SQLite compatibility)
-                try {
+            try {
+                Schema::table('restaurants', function (Blueprint $table) {
                     $table->dropIndex(['subscription_id', 'subscription_status']);
-                } catch (\Exception $e) {
-                }
+                });
+            } catch (\Exception $e) {
+                // Ignore if index doesn't exist
+            }
 
-                // We also drop the column as we will rely on User's subscription
+            Schema::table('restaurants', function (Blueprint $table) {
                 $table->dropColumn('subscription_id');
             });
         }
